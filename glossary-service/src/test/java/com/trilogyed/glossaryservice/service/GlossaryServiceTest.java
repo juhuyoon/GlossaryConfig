@@ -25,13 +25,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class GlossaryServiceTest {
 
-    @Autowired
-    private MockMvc mockMvc;
 
     @MockBean
     private DefinitionClient client;
 
-    private ObjectMapper mapper = new ObjectMapper();
 
     @Before
     public void setUp() throws Exception {
@@ -39,31 +36,15 @@ public class GlossaryServiceTest {
     }
 
     @Test
-    public void createDefinitionShouldReturnCreatedDefinition() throws Exception {
+    public void createDefinition() {
 
-        Definition inputDefinition = new Definition();
-        inputDefinition.setTerm("term");
-        inputDefinition.setDefinition("definition");
+        Definition definition = new Definition();
+        definition.setTerm("term");
+        definition.setDefinition("definition");
 
-        //Object to JSON in String
-        String inputJson = mapper.writeValueAsString(inputDefinition);
+        client.createDefinition(definition);
 
-        Definition outputDefinition = new Definition();
-        outputDefinition.setTerm("term");
-        outputDefinition.setDefinition("definition");
-        outputDefinition.setId(8);
 
-        //Object to JSON in String
-        String outputJson = mapper.writeValueAsString(outputDefinition);
-
-        when(client.createDefinition(inputDefinition)).thenReturn(outputDefinition);
-
-        this.mockMvc.perform(post("/glossary")
-                .content(inputJson)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isCreated())
-                .andExpect(content().json(outputJson));
     }
 
 }
