@@ -23,6 +23,9 @@ public class GlossaryService {
     }
 
     public Definition createDefinition(Definition definition) {
-        return null;
+
+        System.out.println("Creating Definition");
+        return client.createDefinition(definition);
+
     }
 }
