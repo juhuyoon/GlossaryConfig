@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/GlossaryConfig.iml" filepath="$PROJECT_DIR$/.idea/GlossaryConfig.iml" />
+      <module fileurl="file://$PROJECT_DIR$/glossary-service/glossary-service.iml" filepath="$PROJECT_DIR$/glossary-service/glossary-service.iml" />
     </modules>
   </component>
 </project>
