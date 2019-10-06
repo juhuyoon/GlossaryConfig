@@ -12,7 +12,7 @@ import java.util.List;
 @FeignClient("definition-service")
 public interface DefinitionClient {
     @GetMapping("/definition/term/{term}")
-    List<Definition> getDefinitions(@PathVariable String term);
+    List<Definition> getDefinitionsByTerm(@PathVariable String term);
 
     @PostMapping("/definition")
     Definition createDefinition(@RequestBody Definition definition);
