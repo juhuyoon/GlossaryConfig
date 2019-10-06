@@ -13,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.*;
@@ -26,9 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GlossaryServiceTest {
 
 
+
     @MockBean
     private DefinitionClient client;
-
 
     @Before
     public void setUp() throws Exception {
@@ -44,6 +46,24 @@ public class GlossaryServiceTest {
 
         client.createDefinition(definition);
 
+    }
+    @Test
+    public void getDefinitions() {
+
+        Definition definition1 = new Definition();
+        definition1.setTerm("Apple");
+        definition1.setDefinition("An apple is a fruit.");
+        definition1.setDefinition("It is round.");
+        client.createDefinition(definition1);
+
+        Definition definition2 = new Definition();
+        definition2.setTerm("Rain");
+        definition2.setDefinition("Rain is wet.");
+        definition2.setDefinition("Rain is water");
+        client.createDefinition(definition2);
+
+        List<Definition> definitionList = client.getDefinitions(" ");
+        assertEquals(2, definitionList.size());
 
     }
 
