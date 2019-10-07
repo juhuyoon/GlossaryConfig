@@ -70,7 +70,7 @@ public class GlossaryServiceTest {
 //    }
 
     @Test
-    public void getDefinitionsByTerm() {
+    public void testGetDefinitionsByTerm() {
 
         Definition definition1 = new Definition("term", "definition");
         definition1.setId(1);
