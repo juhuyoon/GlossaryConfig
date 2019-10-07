@@ -13,7 +13,7 @@ public class Definition {
     @Pattern(regexp = "^((?!(?<!\\w)(darn|heck|drat|jerk|butt)(?!\\w)).)*$", flags = Pattern.Flag.CASE_INSENSITIVE, message = "Must be family friendly!")
     private String definition;
 
-    public Definition() {
+    public Definition(String term, String definition) {
     }
 
     public Definition(Integer id, String term, String definition) {
