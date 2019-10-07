@@ -7,10 +7,10 @@ import java.util.Objects;
 public class Definition {
     private Integer id;
     @NotBlank
-    @Pattern(regexp = "^((?!(?<!\\w)(darn|heck|drat|jerk|butt)(?!\\w)).)*$", flags = Pattern.Flag.CASE_INSENSITIVE, message = "Must be family friendly!")
+    @Pattern(regexp = "^((?!(?<!\\w)(darn|heck|drat|jerk|butt)(?!\\w)).)*$", flags = {Pattern.Flag.CASE_INSENSITIVE, Pattern.Flag.DOTALL}, message = "Must be family friendly!")
     private String term;
     @NotBlank
-    @Pattern(regexp = "^((?!(?<!\\w)(darn|heck|drat|jerk|butt)(?!\\w)).)*$", flags = Pattern.Flag.CASE_INSENSITIVE, message = "Must be family friendly!")
+    @Pattern(regexp = "^((?!(?<!\\w)(darn|heck|drat|jerk|butt)(?!\\w)).)*$", flags = {Pattern.Flag.CASE_INSENSITIVE, Pattern.Flag.DOTALL}, message = "Must be family friendly!")
     private String definition;
 
     public Definition() {
