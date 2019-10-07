@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -63,13 +64,16 @@ public class GlossaryServiceTest {
         service = new GlossaryService(client);
     }
 
-//    @Test
-//    public void createDefinition() {
-//
-//        Definition definition = new Definition();
-//        definition.setTerm("term");
-//        definition.setDefinition("definition");
-//    }
+    @Test
+    public void createDefinition() {
+        Definition definition = new Definition("term", "definition");
+
+        Definition created = service.createDefinition(definition);
+        assertNotNull(created);
+        definition.setId(created.getId());
+
+        assertEquals(definition, created);
+    }
 
     @Test
     public void testGetDefinitionsByTerm() {
