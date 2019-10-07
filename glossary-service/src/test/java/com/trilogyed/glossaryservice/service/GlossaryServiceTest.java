@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Collections;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -30,7 +32,10 @@ public class GlossaryServiceTest {
     private DefinitionClient client;
 
     private void setUpDefinitionClientMock() {
-        Definition def = new Definition("term", "definition");
+        Definition def = new Definition(
+                "term",
+                "definition"
+        );
         Definition created = new Definition(
                 1,
                 "term",
@@ -48,11 +53,8 @@ public class GlossaryServiceTest {
         );
         when(client.createDefinition(def)).thenReturn(created);
         when(client.createDefinition(def2)).thenReturn(created2);
-        when(client.getDefinitionsByTerm("term 1")).thenReturn(Collections.singletonList(created));
-        when(client.getDefinitionsByTerm("term 2")).thenReturn(Collections.singletonList(created2));
-
-
-
+        when(client.getDefinitionsByTerm(def.getTerm())).thenReturn(Collections.singletonList(created));
+        when(client.getDefinitionsByTerm(def2.getTerm())).thenReturn(Collections.singletonList(created2));
     }
 
     @Before
@@ -72,26 +74,20 @@ public class GlossaryServiceTest {
     @Test
     public void testGetDefinitionsByTerm() {
 
-        Definition definition1 = new Definition("term", "definition");
-        definition1.setId(1);
-        definition1.setTerm("Apple");
-        definition1.setDefinition("An apple is a fruit.");
-        definition1.setDefinition("It is round.");
-        client.createDefinition(definition1);
+        Definition definition1 = new Definition(1, "term", "definition");
 
-        Definition definition2 = new Definition("term", "definition");
-        definition2.setId(2);
-        definition2.setTerm("Rain");
-        definition2.setDefinition("Rain is wet.");
-        definition2.setDefinition("Rain is water");
-        client.createDefinition(definition2);
+        Definition definition2 = new Definition(2, "term 2", "definition 2");
 
-        List<Definition> definitionList = new ArrayList<>();
-        definitionList.add(definition1);
-        definitionList.add(definition2);
+        List<Definition> expectedDefinitionsByTerm1 = new ArrayList<>();
+        expectedDefinitionsByTerm1.add(definition1);
 
-        assertEquals(2, definitionList.size());
+        List<Definition> expectedDefinitionsByTerm2 = new ArrayList<>();
+        expectedDefinitionsByTerm2.add(definition2);
 
+        List<Definition> actualDefinitionsByTerm1 = service.getDefinitionsByTerm(definition1.getTerm());
+        List<Definition> actualDefinitionsByTerm2 = service.getDefinitionsByTerm(definition2.getTerm());
+
+        assertEquals(expectedDefinitionsByTerm1, actualDefinitionsByTerm1);
+        assertEquals(expectedDefinitionsByTerm2, actualDefinitionsByTerm2);
     }
-
 }

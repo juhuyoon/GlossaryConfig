@@ -14,6 +14,8 @@ public class Definition {
     private String definition;
 
     public Definition(String term, String definition) {
+        this.term = term;
+        this.definition = definition;
     }
 
     public Definition(Integer id, String term, String definition) {

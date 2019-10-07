@@ -18,8 +18,8 @@ public class GlossaryService {
         this.client = client;
     }
 
-    public List<Definition> getDefinitions(String term) {
-        return Collections.emptyList();
+    public List<Definition> getDefinitionsByTerm(String term) {
+        return client.getDefinitionsByTerm(term);
     }
 
     public Definition createDefinition(Definition definition) {
